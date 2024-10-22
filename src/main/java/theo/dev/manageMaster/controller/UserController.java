@@ -21,8 +21,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-
+    
     @GetMapping("/me")
     public ResponseEntity<AppUser> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
