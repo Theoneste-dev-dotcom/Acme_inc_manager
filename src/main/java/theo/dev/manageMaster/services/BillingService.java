@@ -17,6 +17,7 @@ public class BillingService {
        billingRepository.findAll().forEach(billings::add);
         return billings;
     }
+
    public String addBilling(BillingData billingData) {
      billingRepository.save(billingData);
      return "Billing added successfully";

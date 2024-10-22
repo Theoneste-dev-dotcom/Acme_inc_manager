@@ -7,7 +7,7 @@ import theo.dev.manageMaster.services.BillingService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/billing")
 public class BillingController {
@@ -18,6 +18,8 @@ public class BillingController {
     public List<BillingData> getAll() {
         return service.getAll();
     }
+
+
     @PostMapping("/add")
     public String addBilling(@RequestBody BillingData billingData) {
         return service.addBilling(billingData);

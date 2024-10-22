@@ -2,10 +2,7 @@ package theo.dev.manageMaster.controller;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import theo.dev.manageMaster.dtos.LoginResponse;
 import theo.dev.manageMaster.dtos.LoginUserDto;
 import theo.dev.manageMaster.dtos.RegisterUserDto;
@@ -24,7 +21,6 @@ public class AuthenticationController {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
     }
-
     @PostMapping("/signup")
     public ResponseEntity<AppUser> register(@RequestBody RegisterUserDto registerUserDto) {
         AppUser registeredUser = authenticationService.signup(registerUserDto);
@@ -32,6 +28,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredUser);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         AppUser authenticatedUser = authenticationService.authenticate(loginUserDto);

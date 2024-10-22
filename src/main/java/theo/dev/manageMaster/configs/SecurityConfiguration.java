@@ -35,35 +35,40 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http .csrf(csrf -> csrf.disable())//CSRF CONFOGURATIO
-                .authorizeHttpRequests( auth -> auth
+        http.csrf(csrf -> csrf.disable())//CSRF CONFOGURATIO
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**")
                         .permitAll()
                         .anyRequest().authenticated()
                 )
 
-                .sessionManagement( session -> session
+                .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider) // custom authentiaction
-                .addFilterBefore((Filter) jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // JWT filter
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // JWT filter
         return http.build();
     }
 
-
-
     @Bean
     public CorsFilter corsFilter() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));  // Add your frontend origin
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow all necessary methods
-        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));  // Allow necessary headers
-        configuration.setAllowCredentials(true);  // If you need credentials (e.g., cookies)
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true); // Allow credentials
+        config.addAllowedOrigin("http://localhost:3000"); // Allow requests from the frontend
+        config.addAllowedHeader("*"); // Allow all headers
+        config.addAllowedMethod("POST"); // Allow POST method
+        config.addAllowedMethod("GET");  // Allow GET method
+        config.addAllowedMethod("PUT");  // Allow PUT method
+        config.addAllowedMethod("DELETE");  // Allow DELETE method
+        config.addExposedHeader("Authorization"); // Expose Authorization header
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Apply CORS configuration to all routes
+        source.registerCorsConfiguration("/**", config); // Apply this CORS configuration to all endpoints
 
         return new CorsFilter(source);
     }
+
+
 
 }

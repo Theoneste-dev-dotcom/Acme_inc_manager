@@ -1,5 +1,6 @@
 package theo.dev.manageMaster.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import theo.dev.manageMaster.services.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import theo.dev.manageMaster.entities.AppUser;
 
 import java.util.List;
 
+
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -19,6 +21,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
     @GetMapping("/me")
     public ResponseEntity<AppUser> authenticatedUser() {
