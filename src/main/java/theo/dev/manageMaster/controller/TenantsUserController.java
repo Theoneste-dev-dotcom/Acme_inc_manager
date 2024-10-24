@@ -59,9 +59,13 @@ public class TenantsUserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable Integer id) {
         return tenantsUserService.deleteUser(id);
+    }
+    @GetMapping("/yours/{id}")
+    public List<TenantsUser> getYours(@PathVariable long id){
+        return tenantsUserService.findByOwnerId(id);
     }
 
     @GetMapping("/all")
