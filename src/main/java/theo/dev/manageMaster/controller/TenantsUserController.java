@@ -32,7 +32,7 @@ public class TenantsUserController {
     }
 
     @GetMapping("/role/{role}")
-    public ResponseEntity<List<TenantsUser>> getUsersByRole(@PathVariable String role) {
+    public ResponseEntity<List<TenantsUser>> getUsersByRole(@PathVariable Integer id,@PathVariable String role) {
         List<TenantsUser> users = tenantsUserService.findByRole(role);
         return ResponseEntity.ok(users);
     }
@@ -43,7 +43,7 @@ public class TenantsUserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<TenantsUser> getByEmail(String email) {
         TenantsUser user = tenantsUserService.findByEmail(email);
         if (user != null) {
@@ -57,6 +57,11 @@ public class TenantsUserController {
     public ResponseEntity<TenantsUser> addNewUser(@RequestBody TenantsUser tenantsUser) {
         TenantsUser user = tenantsUserService.addNewOne(tenantsUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+  @PutMapping("/update/{id}")
+    public String updateUser(@PathVariable Integer id, @RequestBody TenantsUser tenantsUser) {
+        return tenantsUserService.updateUser(id,tenantsUser);
+
     }
 
     @DeleteMapping("/delete/{id}")
