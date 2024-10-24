@@ -3,27 +3,39 @@ package theo.dev.manageMaster.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class BillingData{
+public class BillingData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String address;
     private String state;
+    private String city;
     private String zipcode;
     private String taxIdNumber;
     private String discountCode;
 
-    @OneToOne
-    @JoinColumn(name = "appUser_id")
-    private AppUser appUser;
- public BillingData() {};
+    private Integer app_id;
 
-    public BillingData(String address, String state, String zipcode, String taxIdNumber, String discountCode) {
+    // Default constructor (needed by JPA)
+    public BillingData() {
+    }
+
+    public BillingData(String address, String state, String city, String zipcode, String taxIdNumber, String discountCode, Integer app_id) {
         this.address = address;
         this.state = state;
+        this.city = city;
         this.zipcode = zipcode;
         this.taxIdNumber = taxIdNumber;
         this.discountCode = discountCode;
+        this.app_id = app_id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -40,6 +52,14 @@ public class BillingData{
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getZipcode() {
@@ -65,10 +85,12 @@ public class BillingData{
     public void setDiscountCode(String discountCode) {
         this.discountCode = discountCode;
     }
-    public AppUser getAppUser() {
-        return appUser;
+
+    public Integer getApp_id() {
+        return app_id;
     }
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
+
+    public void setApp_id(Integer app_id) {
+        this.app_id = app_id;
     }
 }

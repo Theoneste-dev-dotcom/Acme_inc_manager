@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 
@@ -61,6 +60,7 @@ public class SecurityConfiguration {
         config.addAllowedMethod("GET");  // Allow GET method
         config.addAllowedMethod("PUT");  // Allow PUT method
         config.addAllowedMethod("DELETE");  // Allow DELETE method
+        config.addAllowedHeader("*");
         config.addExposedHeader("Authorization"); // Expose Authorization header
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

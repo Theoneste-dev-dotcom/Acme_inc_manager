@@ -1,7 +1,6 @@
 package theo.dev.manageMaster.entities;
 
 import jakarta.persistence.*;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,10 +14,10 @@ import java.util.List;
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column( nullable = false)
+    @Column(nullable = false)
     private Integer id;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private String fullName;
 
     @Column(unique = true, nullable = false)
@@ -35,38 +34,23 @@ public class AppUser implements UserDetails {
     @Column(name="updated_at")
     private Date updatedAt;
 
+    private Integer app_id;
+    // Getters and setters
 
-    @OneToOne(mappedBy = "appUser", cascade = CascadeType.ALL)
-    private BillingData billingData;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+    public Integer getApp_id() {
+        return app_id;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public void setApp_id(Integer app_id) {
+        this.app_id = app_id;
     }
 
-    public String getUsername() {
-        return email;
+    public Integer getId() {
+        return id;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled()
-    {
-        return true;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFullName() {
@@ -83,6 +67,10 @@ public class AppUser implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
@@ -105,19 +93,28 @@ public class AppUser implements UserDetails {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public BillingData getBillingData() {
-        return billingData;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setBillingData(BillingData billingData) {
-        this.billingData = billingData;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
