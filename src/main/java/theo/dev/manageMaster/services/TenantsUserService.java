@@ -33,6 +33,7 @@ public class TenantsUserService {
        }
 
     }
+
     public List<TenantsUser> findByOwnerId(Long ownerId) {
         return tenantsUsersRepository.findByOwnerId(ownerId);
     }
