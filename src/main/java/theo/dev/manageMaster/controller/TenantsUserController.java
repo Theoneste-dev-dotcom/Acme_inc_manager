@@ -3,6 +3,7 @@ package theo.dev.manageMaster.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import theo.dev.manageMaster.entities.TenantsUser;
 import theo.dev.manageMaster.services.TenantsUserService;
@@ -78,5 +79,6 @@ public class TenantsUserController {
         List<TenantsUser> allUsers = tenantsUserService.getAllUsers();
         return ResponseEntity.ok(allUsers);
     }
+
 }
 

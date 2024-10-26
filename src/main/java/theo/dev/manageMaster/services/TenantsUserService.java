@@ -2,6 +2,8 @@ package theo.dev.manageMaster.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import theo.dev.manageMaster.entities.Product;
 import theo.dev.manageMaster.entities.TenantsUser;
 import theo.dev.manageMaster.repository.TenantsUsersRepository;
 
@@ -23,6 +25,7 @@ public class TenantsUserService {
         tenantsUsersRepository.deleteById(id);
         return "User deleted successfully";
     }
+
     public String updateUser(Integer id, TenantsUser tenantsUser) {
        Optional<TenantsUser> oldUser =  tenantsUsersRepository.findById(id);
        if(oldUser.isPresent()) {
@@ -41,6 +44,7 @@ public class TenantsUserService {
     public List<TenantsUser> findByRole( String role) {
         return tenantsUsersRepository.findByRole(role);
     }
+
  public List<TenantsUser> findByPermissions(String perm) {
         return tenantsUsersRepository.findByPermissions(perm);
     }
@@ -59,4 +63,6 @@ public class TenantsUserService {
         tenantsUsersRepository.findAll().forEach(users::add);
         return users;
     }
+
+
 }

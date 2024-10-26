@@ -1,5 +1,6 @@
 package theo.dev.manageMaster.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,21 +29,29 @@ public class AppUser implements UserDetails {
 
     @CreationTimestamp
     @Column(updatable = false, name="created_at")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
     private Date createdAt;
 
     @UpdateTimestamp
     @Column(name="updated_at")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
     private Date updatedAt;
 
-    private Integer app_id;
-    // Getters and setters
+    @Column(nullable = true, updatable = true)
+    private String imageName;
 
-    public Integer getApp_id() {
-        return app_id;
+
+    private String imageType;
+    @Lob
+    private byte[] imageData;
+
+
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setApp_id(Integer app_id) {
-        this.app_id = app_id;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 
     public Integer getId() {
@@ -116,5 +125,21 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }
