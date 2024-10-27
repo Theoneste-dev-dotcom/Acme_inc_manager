@@ -43,22 +43,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateProfile(@PathVariable Integer id, @RequestPart AppUser appUser, @RequestPart MultipartFile imageFile) {
-        try {
-            AppUser appUser1 = userService.updateProfile(appUser, imageFile);
-            return ResponseEntity.ok(appUser1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    @GetMapping("/profile/{id}/image")
-    public ResponseEntity<byte[]> getProfileImage(@PathVariable String email, Integer id) {
-        AppUser appUser = userService.getById(id);
-        byte[] imageFile = appUser.getImageData();
-        return ResponseEntity.ok()
-                .contentType(MediaType.valueOf(appUser.getImageType()))
-                .body(imageFile);
-    }
+
+
 }

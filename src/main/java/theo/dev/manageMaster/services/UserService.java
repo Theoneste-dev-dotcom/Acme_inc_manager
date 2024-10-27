@@ -24,14 +24,8 @@ public class UserService {
         return users;
     }
 
-    public AppUser updateProfile(AppUser appUser, MultipartFile image) throws IOException {
-        appUser.setImageName(image.getOriginalFilename());
-        appUser.setImageType(image.getContentType());
-        appUser.setImageData(image.getBytes());
-        return userRepository.save(appUser);
-    }
 
-    public AppUser getUserByEmail(String email) {
+    public Optional<AppUser> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

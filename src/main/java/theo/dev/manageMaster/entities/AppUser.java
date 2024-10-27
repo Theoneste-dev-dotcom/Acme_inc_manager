@@ -41,10 +41,6 @@ public class AppUser implements UserDetails {
     private String imageName;
 
 
-    private String imageType;
-    @Lob
-    private byte[] imageData;
-
 
     public String getImageName() {
         return imageName;
@@ -127,19 +123,6 @@ public class AppUser implements UserDetails {
         return true;
     }
 
-    public String getImageType() {
-        return imageType;
-    }
 
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
 
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
-    }
 }
